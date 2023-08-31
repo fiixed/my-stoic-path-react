@@ -1,12 +1,25 @@
 import { useState } from 'react';
+import axios from 'axios';
 import AppButton from './components/AppButton';
 import JournalEntry from './components/JournalEntry';
 
 const App = () => {
-  const [entry, setEntry] = useState("");
+  const [entry, setEntry] = useState('');
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      <div className="space-y-6 bg-white shadow-md rounded p-5">
+      <form
+        onSubmit={async (evt) => {
+          evt.preventDefault();
+          const { data } = await axios.post(
+            'http://localhost:8000/journal/create',
+            {
+              description: entry,
+            }
+          );
+          console.log(data);
+        }}
+        className="space-y-6 bg-white shadow-md rounded p-5"
+      >
         <h1 className="font-semibold text-2xl text-center">Journal</h1>
         <div>
           <textarea
@@ -19,13 +32,9 @@ const App = () => {
           ></textarea>
         </div>
         <div className="text-right">
-          <AppButton
-            title="Submit"
-            type="regular"
-            onClick={() => console.log(entry)}
-          />
+          <AppButton title="Submit" type="regular" />
         </div>
-      </div>
+      </form>
 
       {/* Journal Entry Items */}
       <JournalEntry timestamp="test" />
