@@ -1,12 +1,12 @@
 const App = () => {
   return (
-    <div className="container">
-      <h1>Journal</h1>
+    <div className="w-[500px] mx-auto bg-gray-200">
+      <h1 className="font-semibold text-2xl text-blue-400">Journal</h1>
       <div>
-        <label className="label">TimeStamp</label>
+        <label className="">TimeStamp</label>
       </div>
       <div>
-        <textarea placeholder="Entry" className="textarea"></textarea>
+        <textarea placeholder="Entry" className=""></textarea>
       </div>
     </div>
   );
