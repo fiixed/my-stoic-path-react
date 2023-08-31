@@ -4,6 +4,7 @@ import AppButton from './components/AppButton';
 import JournalEntry from './components/JournalEntry';
 
 const App = () => {
+  const [entries, setEntries] = useState<{ id: string; timestamp: Date }[]>([]);
   const [entry, setEntry] = useState('');
   return (
     <div className="max-w-3xl mx-auto space-y-6">
@@ -16,7 +17,8 @@ const App = () => {
               description: entry,
             }
           );
-          console.log(data);
+          setEntries([data.entry, ...entries]);
+          setEntry('');
         }}
         className="space-y-6 bg-white shadow-md rounded p-5"
       >
@@ -37,7 +39,10 @@ const App = () => {
       </form>
 
       {/* Journal Entry Items */}
-      <JournalEntry timestamp="test" />
+      {entries.map((entry) => {
+        return <JournalEntry key={entry.id} timestamp={entry.timestamp} />;
+      })}
+      
     </div>
   );
 };
