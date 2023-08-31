@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import AppButton from './components/AppButton';
 import JournalEntry from './components/JournalEntry';
@@ -6,6 +6,15 @@ import JournalEntry from './components/JournalEntry';
 const App = () => {
   const [entries, setEntries] = useState<{ id: string; timestamp: Date }[]>([]);
   const [entry, setEntry] = useState('');
+
+  useEffect(() => {
+    const fetchEntries = async () => {
+      const { data } = await axios('http://localhost:8000/journal');
+      setEntries(data.entries);
+    };
+    fetchEntries();
+  }, []);
+
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <form
@@ -42,7 +51,6 @@ const App = () => {
       {entries.map((entry) => {
         return <JournalEntry key={entry.id} timestamp={entry.timestamp} />;
       })}
-      
     </div>
   );
 };

@@ -6,6 +6,7 @@ interface Props {
 }
 
 const JournalEntry: FC<Props> = ({ timestamp }) => {
+    
   return (
     <div className="bg-white shadow-md rounded p-5">
       <p className="font-semibold mb-4 text-gray-700 text-lg">{timestamp.toString()}</p>
