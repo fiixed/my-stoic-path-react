@@ -4,7 +4,7 @@ import AppButton from './components/AppButton';
 import JournalEntry from './components/JournalEntry';
 
 const App = () => {
-  const [entries, setEntries] = useState<{ id: string; timestamp: Date }[]>([]);
+  const [entries, setEntries] = useState<{ id: string; timestamp: Date, description: string }[]>([]);
   const [entry, setEntry] = useState('');
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const App = () => {
 
       {/* Journal Entry Items */}
       {entries.map((entry) => {
-        return <JournalEntry key={entry.id} timestamp={entry.timestamp} />;
+        return <JournalEntry key={entry.id} timestamp={entry.timestamp} description={entry.description} />;
       })}
     </div>
   );
