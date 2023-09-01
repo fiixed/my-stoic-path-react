@@ -6,9 +6,10 @@ interface Props {
   timestamp: Date;
   description: string;
   onEditClick?(): void;
+  onDeleteClick?(): void;
 }
 
-const JournalEntry: FC<Props> = ({ timestamp, description, onEditClick }) => {
+const JournalEntry: FC<Props> = ({ timestamp, description, onEditClick, onDeleteClick }) => {
   const formattedTimestamp = moment(timestamp).format('MM-DD-YYYY  hh:mm:ss a');
 
   return (
@@ -20,7 +21,7 @@ const JournalEntry: FC<Props> = ({ timestamp, description, onEditClick }) => {
       <div className="space-x-4">
         <AppButton title="View" type="regular" />
         <AppButton onClick={onEditClick} title="Edit" type="normal" />
-        <AppButton title="Delete" type="danger" />
+        <AppButton onClick={onDeleteClick} title="Delete" type="danger" />
       </div>
     </div>
   );

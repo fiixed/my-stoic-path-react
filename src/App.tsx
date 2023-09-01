@@ -13,7 +13,9 @@ const App = () => {
   useEffect(() => {
     const fetchEntries = async () => {
       const { data } = await axios('http://localhost:8000/journal');
-      setEntries(data.entries);
+      
+      
+      setEntries(data.entries.reverse());
     };
     fetchEntries();
   }, []);
@@ -30,14 +32,14 @@ const App = () => {
                 description: entry,
               }
             );
-            const updatedNotes = entries.map((entry) => {
+            const updatedEntries = entries.map((entry) => {
               if (entry.id === selectedId) {
                 entry.description = data.entry.description;
                 entry.timestamp = data.entry.timestamp;
               }
               return entry;
             });
-            setEntries([...updatedNotes]);
+            setEntries([...updatedEntries]);
             setEntry('');
             return;
           }
@@ -75,6 +77,19 @@ const App = () => {
             onEditClick={() => {
               setEntry(entry.description);
               setSelectedId(entry.id);
+            }}
+            onDeleteClick={async () => {
+              const result = confirm('Are you sure?');
+              if (result) {
+                await axios.delete(
+                  `http://localhost:8000/journal/${entry.id}`
+                );
+                const updatedEntries = entries.filter(({id}) => {
+                  if (id !== entry.id) return entry;
+                });
+                setEntries([...updatedEntries]);
+                
+              }
             }}
             key={entry.id}
             timestamp={entry.timestamp}
