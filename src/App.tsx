@@ -4,8 +4,11 @@ import AppButton from './components/AppButton';
 import JournalEntry from './components/JournalEntry';
 
 const App = () => {
-  const [entries, setEntries] = useState<{ id: string; timestamp: Date, description: string }[]>([]);
+  const [entries, setEntries] = useState<
+    { id: string; timestamp: Date; description: string }[]
+  >([]);
   const [entry, setEntry] = useState('');
+  const [selectedId, setSelectedId] = useState('');
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -20,6 +23,24 @@ const App = () => {
       <form
         onSubmit={async (evt) => {
           evt.preventDefault();
+          if (selectedId) {
+            const { data } = await axios.patch(
+              `http://localhost:8000/journal/${selectedId}`,
+              {
+                description: entry,
+              }
+            );
+            const updatedNotes = entries.map((entry) => {
+              if (entry.id === selectedId) {
+                entry.description = data.entry.description;
+                entry.timestamp = data.entry.timestamp;
+              }
+              return entry;
+            });
+            setEntries([...updatedNotes]);
+            setEntry('');
+            return;
+          }
           const { data } = await axios.post(
             'http://localhost:8000/journal/create',
             {
@@ -49,7 +70,17 @@ const App = () => {
 
       {/* Journal Entry Items */}
       {entries.map((entry) => {
-        return <JournalEntry key={entry.id} timestamp={entry.timestamp} description={entry.description} />;
+        return (
+          <JournalEntry
+            onEditClick={() => {
+              setEntry(entry.description);
+              setSelectedId(entry.id);
+            }}
+            key={entry.id}
+            timestamp={entry.timestamp}
+            description={entry.description}
+          />
+        );
       })}
     </div>
   );

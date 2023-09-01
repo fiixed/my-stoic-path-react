@@ -5,9 +5,10 @@ import AppButton from './AppButton';
 interface Props {
   timestamp: Date;
   description: string;
+  onEditClick?(): void;
 }
 
-const JournalEntry: FC<Props> = ({ timestamp, description }) => {
+const JournalEntry: FC<Props> = ({ timestamp, description, onEditClick }) => {
   const formattedTimestamp = moment(timestamp).format('MM-DD-YYYY  hh:mm:ss a');
 
   return (
@@ -18,7 +19,7 @@ const JournalEntry: FC<Props> = ({ timestamp, description }) => {
       <p className=" mb-4 text-gray-500 text-lg">{description}</p>
       <div className="space-x-4">
         <AppButton title="View" type="regular" />
-        <AppButton title="Edit" type="normal" />
+        <AppButton onClick={onEditClick} title="Edit" type="normal" />
         <AppButton title="Delete" type="danger" />
       </div>
     </div>
