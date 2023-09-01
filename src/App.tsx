@@ -13,8 +13,7 @@ const App = () => {
   useEffect(() => {
     const fetchEntries = async () => {
       const { data } = await axios('http://localhost:8000/journal');
-      
-      
+
       setEntries(data.entries.reverse());
     };
     fetchEntries();
@@ -81,14 +80,11 @@ const App = () => {
             onDeleteClick={async () => {
               const result = confirm('Are you sure?');
               if (result) {
-                await axios.delete(
-                  `http://localhost:8000/journal/${entry.id}`
+                await axios.delete(`http://localhost:8000/journal/${entry.id}`);
+                const updatedEntries = entries.filter(
+                  ({ id }) => id !== entry.id
                 );
-                const updatedEntries = entries.filter(({id}) => {
-                  if (id !== entry.id) return entry;
-                });
                 setEntries([...updatedEntries]);
-                
               }
             }}
             key={entry.id}
