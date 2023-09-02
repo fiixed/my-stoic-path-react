@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import {
   entriesReducer,
   addEntry,
+  editEntry,
   removeEntry,
   changeSearchTerm,
 } from './slices/entriesSlice';
@@ -14,4 +15,4 @@ const store = configureStore({
   },
 });
 
-export { store, changeDescription, addEntry, removeEntry, changeSearchTerm };
+export { store, changeDescription, addEntry, editEntry, removeEntry, changeSearchTerm };

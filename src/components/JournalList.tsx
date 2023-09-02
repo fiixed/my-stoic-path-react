@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { changeDescription, removeEntry } from '../store';
+import { editEntry,removeEntry } from '../store';
 import JournalListItem from './JournalListItem';
 
 const JournalList = () => {
@@ -13,9 +13,8 @@ const JournalList = () => {
    
   };
 
-  const handleEntryEdit = (entry) => {
-    dispatch(changeDescription(entry.description));
- 
+  const handleEntryEdit = (entry) => { 
+    dispatch(editEntry(entry));
   };
   const renderedEntries = entries.map((entry) => {
     return (
