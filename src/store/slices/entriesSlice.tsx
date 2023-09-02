@@ -1,5 +1,4 @@
-import { nanoid } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const entriesSlice = createSlice({
   name: 'entries',
@@ -15,7 +14,7 @@ const entriesSlice = createSlice({
       state.entries.push({
         timestamp: Date.now(),
         description: action.payload.description,
-        id: nanoid,
+        id: nanoid(),
       });
     },
     removeEntry(state, action) {
