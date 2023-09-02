@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import AppButton from './components/AppButton';
-import JournalEntry from './components/JournalEntry';
+import JournalList from './components/JournalList';
 
 const App = () => {
   const [entries, setEntries] = useState<
@@ -69,10 +69,10 @@ const App = () => {
         </div>
       </form>
 
-      {/* Journal Entry Items */}
+      {/* Journal List */}
       {entries.map((entry) => {
         return (
-          <JournalEntry
+          <JournalList
             onEditClick={() => {
               setEntry(entry.description);
               setSelectedId(entry.id);
