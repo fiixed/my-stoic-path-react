@@ -14,6 +14,7 @@ const entriesSlice = createSlice({
     addEntry(state, action) {
       if (state.editID) {
         const index = state.data.findIndex((x) => x.id === state.editID);
+        state.data[index].timestamp = Date.now();
         state.data[index].description = action.payload.description;
         state.data[index].id = state.editID;
         state.editID = '';
