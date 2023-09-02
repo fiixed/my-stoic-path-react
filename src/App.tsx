@@ -4,6 +4,7 @@
 // import JournalList from './components/JournalList';
 
 import JournalForm from "./components/JournalForm";
+import JournalList from "./components/JournalList";
 
 const App = () => {
   // const [entries, setEntries] = useState<
@@ -24,6 +25,7 @@ const App = () => {
   return (
     <>
       <JournalForm />
+      <JournalList />
     </>
   );
     // <div className="max-w-3xl mx-auto space-y-6">
@@ -75,30 +77,7 @@ const App = () => {
     //     </div>
     //   </form>
 
-    //   {/* Journal List */}
-    //   {entries.map((entry) => {
-    //     return (
-    //       <JournalList
-    //         onEditClick={() => {
-    //           setEntry(entry.description);
-    //           setSelectedId(entry.id);
-    //         }}
-    //         onDeleteClick={async () => {
-    //           const result = confirm('Are you sure?');
-    //           if (result) {
-    //             await axios.delete(`http://localhost:8000/journal/${entry.id}`);
-    //             const updatedEntries = entries.filter(
-    //               ({ id }) => id !== entry.id
-    //             );
-    //             setEntries([...updatedEntries]);
-    //           }
-    //         }}
-    //         key={entry.id}
-    //         timestamp={entry.timestamp}
-    //         description={entry.description}
-    //       />
-    //     );
-    //   })}
+    
     // </div>
   
 };

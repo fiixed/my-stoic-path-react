@@ -1,30 +1,35 @@
-import { FC } from 'react';
-import moment from 'moment';
-import AppButton from './AppButton';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeDescription, removeEntry } from '../store';
+import JournalListItem from './JournalListItem';
 
-interface Props {
-  timestamp: Date;
-  description: string;
-  onEditClick?(): void;
-  onDeleteClick?(): void;
-}
+const JournalList = () => {
+  const dispatch = useDispatch();
+  const entries = useSelector((state) => {
+    return state.entries.data;
+  });
 
-const JournalList: FC<Props> = ({ timestamp, description, onEditClick, onDeleteClick }) => {
-  const formattedTimestamp = moment(timestamp).format('MM-DD-YYYY  hh:mm:ss a');
+  const handleEntryDelete = (entry) => {
+    dispatch(removeEntry(entry.id));
+   
+  };
 
-  return (
-    <div className="bg-white shadow-md rounded p-5">
-      <p className="font-semibold mb-4 text-gray-700 text-lg">
-        {formattedTimestamp}
-      </p>
-      <p className=" mb-4 text-gray-500 text-lg">{description}</p>
-      <div className="space-x-4">
-        <AppButton title="View" type="regular" />
-        <AppButton onClick={onEditClick} title="Edit" type="normal" />
-        <AppButton onClick={onDeleteClick} title="Delete" type="danger" />
-      </div>
-    </div>
-  );
+  const handleEntryEdit = (entry) => {
+    dispatch(changeDescription(entry.description));
+ 
+  };
+  const renderedEntries = entries.map((entry) => {
+    return (
+      <JournalListItem
+        onEditClick={() => handleEntryEdit(entry)}
+        onDeleteClick={() => handleEntryDelete(entry)}
+        key={entry.id}
+        timestamp={entry.timestamp}
+        description={entry.description}
+      />
+    );
+  });
+
+  return <div>{renderedEntries}</div>;
 };
 
 export default JournalList;
