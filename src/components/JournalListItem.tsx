@@ -9,7 +9,7 @@ interface Props {
   onDeleteClick?(): void;
 }
 
-const JournalEntry: FC<Props> = ({ timestamp, description, onEditClick, onDeleteClick }) => {
+const JournalListItem: FC<Props> = ({ timestamp, description, onEditClick, onDeleteClick }) => {
   const formattedTimestamp = moment(timestamp).format('MM-DD-YYYY  hh:mm:ss a');
 
   return (
@@ -27,4 +27,4 @@ const JournalEntry: FC<Props> = ({ timestamp, description, onEditClick, onDelete
   );
 };
 
-export default JournalEntry;
+export default JournalListItem;
