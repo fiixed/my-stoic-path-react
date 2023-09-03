@@ -12,7 +12,7 @@ const formSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(addEntry, (state, action) => {
+    builder.addCase(addEntry, (state) => {
       state.description = '';
     });
     builder.addCase(editEntry, (state, action) => {

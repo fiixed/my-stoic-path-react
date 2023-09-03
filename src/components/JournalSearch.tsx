@@ -6,12 +6,13 @@ const JournalSearch = () => {
   const searchTerm = useSelector((state) => {
     return state.entries.searchTerm;
   });
-
+ 
   const handleSearchTermChange = (event) => {
     dispatch(changeSearchTerm(event.target.value));
   };
   return (
     <div className="max-w-3xl mx-auto space-y-6">
+     
       <input
         placeholder="Search"
         className="w-full border-b-2 border-gray-700 outline-none"

@@ -5,9 +5,11 @@ import JournalListItem from './JournalListItem';
 const JournalList = () => {
   const dispatch = useDispatch();
   const entries = useSelector((state) => {
-    return state.entries.data;
+    return state.entries.data.filter((entry) =>
+      entry.description.toLowerCase().includes(state.entries.searchTerm.toLowerCase())
+    );
   });
-
+ 
   const handleEntryDelete = (entry) => {
     dispatch(removeEntry(entry.id));
    
