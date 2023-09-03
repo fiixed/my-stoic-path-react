@@ -5,6 +5,7 @@
 
 import JournalForm from "./components/JournalForm";
 import JournalList from "./components/JournalList";
+import JournalSearch from "./components/JournalSearch";
 
 const App = () => {
   // const [entries, setEntries] = useState<
@@ -25,6 +26,7 @@ const App = () => {
   return (
     <>
       <JournalForm />
+      <JournalSearch />
       <JournalList />
     </>
   );
