@@ -26,7 +26,7 @@ const JournalList = () => {
         description={entry.description}
       />
     );
-  });
+  }).reverse();
 
   return <div>{renderedEntries}</div>;
 };
