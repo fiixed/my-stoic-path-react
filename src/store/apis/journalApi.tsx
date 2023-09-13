@@ -7,7 +7,29 @@ const journalApi = createApi({
   }),
   endpoints(builder) {
     return {
+      removeEntry: builder.mutation({
+        invalidatesTags: ['Entry'],
+        query: (id) => {
+          return {
+            url: `/journal/${id}`,
+            method: 'DELETE',
+          };
+        },
+      }),
+      addEntry: builder.mutation({
+        invalidatesTags: ['Entry'],
+        query: (description) => {
+          return {
+            url: '/journal/create',
+            method: 'POST',
+            body: {
+              description: description,
+            },
+          };
+        },
+      }),
       fetchEntries: builder.query({
+        providesTags: ['Entry'],
         query: () => {
           return {
             url: '/journal',
@@ -19,5 +41,5 @@ const journalApi = createApi({
   },
 });
 
-export const { useFetchEntriesQuery } = journalApi;
+export const { useAddEntryMutation, useFetchEntriesQuery, useRemoveEntryMutation } = journalApi;
 export { journalApi };

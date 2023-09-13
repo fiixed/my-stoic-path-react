@@ -24,4 +24,8 @@ const store = configureStore({
 setupListeners(store.dispatch);
 
 export { store, changeDescription, addEntry, editEntry, removeEntry, changeSearchTerm };
-export { useFetchEntriesQuery } from './apis/journalApi';
+export {
+  useAddEntryMutation,
+  useFetchEntriesQuery,
+  useRemoveEntryMutation,
+} from './apis/journalApi';

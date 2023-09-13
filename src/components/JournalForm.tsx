@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeDescription, addEntry} from '../store';
+import { changeDescription, useAddEntryMutation} from '../store';
 
 import AppButton from './AppButton';
 
 const JournalForm = () => {
+  const [ addEntry, results ] = useAddEntryMutation();
+ 
   const dispatch = useDispatch();
   const description = useSelector((state) => {
     return state.form.description;
@@ -14,7 +16,7 @@ const JournalForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addEntry({description}));
+    addEntry(description);
 
   }
   return (

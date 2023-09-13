@@ -1,11 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useFetchEntriesQuery } from '../store';
-import { editEntry, removeEntry } from '../store';
+import { useFetchEntriesQuery, useRemoveEntryMutation } from '../store';
+import { editEntry } from '../store';
 import JournalListItem from './JournalListItem';
 import Skeleton from './Skeleton';
 
 const JournalList = () => {
   const { data, error, isLoading } = useFetchEntriesQuery(null);
+  const [removeEntry, results] = useRemoveEntryMutation();
   console.log(data, error, isLoading);
   const dispatch = useDispatch();
   const filteredEntries = useSelector(({ entries: { data, searchTerm } }) => {
@@ -15,7 +16,7 @@ const JournalList = () => {
   });
 
   const handleEntryDelete = (entry) => {
-    dispatch(removeEntry(entry.id));
+    removeEntry(entry.id);
   };
 
   const handleEntryEdit = (entry) => {
@@ -29,20 +30,19 @@ const JournalList = () => {
     content = <div> Error loading albums.</div>;
   } else {
     content = data.entries
-    .map((entry) => {
-      return (
-        <JournalListItem
-          onEditClick={() => handleEntryEdit(entry)}
-          onDeleteClick={() => handleEntryDelete(entry)}
-          key={entry.id}
-          timestamp={entry.timestamp}
-          description={entry.description}
-        />
-      );
-    })
-    .reverse();
+      .map((entry) => {
+        return (
+          <JournalListItem
+            onEditClick={() => handleEntryEdit(entry)}
+            onDeleteClick={() => handleEntryDelete(entry)}
+            key={entry.id}
+            timestamp={entry.timestamp}
+            description={entry.description}
+          />
+        );
+      })
+      .reverse();
   }
-  
 
   return <div>{content}</div>;
 };
