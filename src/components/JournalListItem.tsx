@@ -21,14 +21,16 @@ const JournalListItem: FC<Props> = ({
 
   const header = (
     <>
-      <button onClick={onDeleteClick}>
-        <GoTrash />
-      </button>
-      <button onClick={onEditClick}>
-        <GrEdit />
-      </button>
-      {/* {error && <div>Error deleting user.</div>} */}
-      {formattedTimestamp}
+     
+        <button onClick={onDeleteClick}>
+          <GoTrash />
+        </button>
+        <button onClick={onEditClick}>
+          <GrEdit />
+        </button>
+        {/* {error && <div>Error deleting user.</div>} */}
+        {formattedTimestamp}
+    
     </>
   );
 
