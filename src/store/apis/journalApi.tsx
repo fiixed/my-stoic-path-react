@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const entriesApi = createApi({
-  reducerPath: 'entries',
+const journalApi = createApi({
+  reducerPath: 'journal',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:8000',
   }),
@@ -19,5 +19,5 @@ const entriesApi = createApi({
   },
 });
 
-export const { useFetchEntriesQuery } = entriesApi;
-export { entriesApi };
+export const { useFetchEntriesQuery } = journalApi;
+export { journalApi };
