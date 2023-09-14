@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useFetchEntriesQuery, useRemoveEntryMutation } from '../store';
+import { useFetchEntriesQuery, useRemoveEntryMutation, usePatchEntryMutation } from '../store';
 import { editEntry } from '../store';
 import JournalListItem from './JournalListItem';
 import Skeleton from './Skeleton';
@@ -7,7 +7,8 @@ import Skeleton from './Skeleton';
 const JournalList = () => {
   const { data, error, isLoading } = useFetchEntriesQuery(null);
   const [removeEntry, results] = useRemoveEntryMutation();
-  console.log(data, error, isLoading);
+
+  
   const dispatch = useDispatch();
   const filteredEntries = useSelector(({ entries: { data, searchTerm } }) => {
     return data.filter((entry) =>

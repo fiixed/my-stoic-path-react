@@ -3,11 +3,10 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import {
   entriesReducer,
   addEntry,
-  editEntry,
   removeEntry,
   changeSearchTerm,
 } from './slices/entriesSlice';
-import { formReducer, changeDescription } from './slices/formSlice';
+import { formReducer, changeDescription, editEntry } from './slices/formSlice';
 import { journalApi } from './apis/journalApi';
 
 const store = configureStore({
@@ -23,9 +22,17 @@ const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { store, changeDescription, addEntry, editEntry, removeEntry, changeSearchTerm };
+export {
+  store,
+  changeDescription,
+  addEntry,
+  editEntry,
+  removeEntry,
+  changeSearchTerm,
+};
 export {
   useAddEntryMutation,
   useFetchEntriesQuery,
   useRemoveEntryMutation,
+  usePatchEntryMutation,
 } from './apis/journalApi';

@@ -28,6 +28,20 @@ const journalApi = createApi({
           };
         },
       }),
+      patchEntry: builder.mutation({
+        invalidatesTags: ['Entry'],
+        query: (args) => {
+          const {editID, description} = args;
+         
+          return {
+            url:`/journal/${editID}`,
+            method: 'PATCH',
+            body: {
+              description: description,
+            },
+          };
+        },
+      }),
       fetchEntries: builder.query({
         providesTags: ['Entry'],
         query: () => {
@@ -41,5 +55,13 @@ const journalApi = createApi({
   },
 });
 
-export const { useAddEntryMutation, useFetchEntriesQuery, useRemoveEntryMutation } = journalApi;
+export const {
+  useAddEntryMutation,
+  useFetchEntriesQuery,
+  useRemoveEntryMutation,
+  usePatchEntryMutation,
+} = journalApi;
+export const {
+  endpoints: { addEntry },
+} = journalApi;
 export { journalApi };

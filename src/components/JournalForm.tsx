@@ -1,27 +1,39 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeDescription, useAddEntryMutation} from '../store';
+import {
+  changeDescription,
+  useAddEntryMutation,
+  usePatchEntryMutation,
+} from '../store';
 
 import AppButton from './AppButton';
 
 const JournalForm = () => {
-  const [ addEntry, results ] = useAddEntryMutation();
- 
+  const [addEntry, results] = useAddEntryMutation();
+  const [patchEntry, results2] = usePatchEntryMutation();
+
   const dispatch = useDispatch();
-  const description = useSelector((state) => {
-    return state.form.description;
+  const { description, editID } = useSelector((state) => {
+    return state.form;
   });
+
   const handleDescriptionChange = (event) => {
-    dispatch(changeDescription(event.target.value))
+    dispatch(changeDescription(event.target.value));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addEntry(description);
-
-  }
+    if (editID) {
+      patchEntry({ editID, description });
+    } else {
+      addEntry(description);
+    }
+  };
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      <form onSubmit={handleSubmit} className="space-y-6 bg-white shadow-md rounded p-5">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6 bg-white shadow-md rounded p-5"
+      >
         <h1 className="font-semibold text-2xl text-center">Journal</h1>
         <div>
           <textarea
