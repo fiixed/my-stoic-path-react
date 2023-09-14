@@ -32,7 +32,6 @@ const journalApi = createApi({
         invalidatesTags: ['Entry'],
         query: (args) => {
           const {editID, description} = args;
-         
           return {
             url:`/journal/${editID}`,
             method: 'PATCH',
@@ -62,6 +61,6 @@ export const {
   usePatchEntryMutation,
 } = journalApi;
 export const {
-  endpoints: { addEntry },
+  endpoints: { addEntry, patchEntry },
 } = journalApi;
 export { journalApi };

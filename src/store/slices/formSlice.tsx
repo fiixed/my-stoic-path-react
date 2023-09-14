@@ -30,6 +30,12 @@ const formSlice = createSlice({
         state.description = '';
       }
     );
+    builder.addMatcher(
+      journalApi.endpoints.patchEntry.matchFulfilled,
+      (state, action) => {
+        state.description = '';
+      }
+    );
   },
 });
 
